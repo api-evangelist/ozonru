@@ -1,0 +1,47 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  live probe of https://api-seller.ozon.ru + OZON Seller API docs
+  (https://docs.ozon.ru/api/seller/)
+api: OZON Seller API
+base_url: https://api-seller.ozon.ru
+auth:
+  style: api-key headers
+  headers:
+  - Client-Id
+  - Api-Key
+  cross_ref: authentication/ozonru-authentication.yml
+request_style:
+  transport: https (TLS 1.3)
+  shape: RPC-over-HTTP
+  http_method: POST-only (JSON request body); GET returns HTTP 405 (verified)
+  path_pattern: /v{n}/{resource}/{action}  e.g. /v1/warehouse/list, /v3/product/list
+  content_type: application/json
+versioning:
+  style: url-path
+  detail: >-
+    Each operation is versioned independently in its path (v1, v2, v3, v4 seen
+    across the surface). New versions ship as new paths; old versions remain
+    until deprecated. Verified live: /v1/warehouse/list and /v3/product/list
+    both resolve.
+  cross_ref: lifecycle/ozonru-lifecycle.yml
+error_envelope:
+  format: grpc-status-json
+  fields: [code, message, details]
+  cross_ref: errors/ozonru-problem-types.yml
+pagination:
+  style: cursor / offset (per-method)
+  note: >-
+    Listing methods use last_id / cursor tokens or limit+offset depending on the
+    method (e.g. product list uses last_id + limit). Confirm per operation in
+    the docs object reference.
+idempotency:
+  supported: unknown
+  note: >-
+    OZON does not publish a documented idempotency-key header for the Seller
+    API; not asserting an Idempotency capability. Update if the docs reference a
+    per-request idempotency key.
+rate_limiting:
+  note: >-
+    Per-method rate limits apply; exhaustion maps to grpc RESOURCE_EXHAUSTED
+    (HTTP 429). Specific quotas are documented per method in the reference.

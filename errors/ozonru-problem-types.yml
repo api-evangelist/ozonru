@@ -1,0 +1,59 @@
+generated: '2026-07-20'
+method: derived
+source: >-
+  live probe of https://api-seller.ozon.ru error responses (envelope observed
+  directly) cross-referenced with the gRPC canonical status code set
+api: OZON Seller API
+format: grpc-status-json
+envelope:
+  description: >-
+    Errors are returned as a JSON object with an integer gRPC status `code`, a
+    human-readable `message`, and (for validation errors) an optional `details`
+    array. This is the standard grpc-gateway error shape, not RFC 9457
+    problem+json. HTTP status roughly mirrors the gRPC code.
+  fields:
+  - code    # integer, gRPC canonical status code
+  - message # string, human-readable
+  - details # array, optional (field-level validation info)
+problem_types:
+- code: 3
+  grpc: INVALID_ARGUMENT
+  http: 400
+  title: Invalid request argument
+  observed_message: Client-Id header value should be positive integer
+  remediation: >-
+    Send a numeric Client-Id header (the seller/client id from the cabinet) and
+    a well-formed request body.
+  source: live-probe
+- code: 5
+  grpc: NOT_FOUND
+  http: 404
+  title: Invalid credentials / resource not found
+  observed_message: Invalid Api-Key, please check the key and try again
+  remediation: >-
+    Verify the Api-Key from the seller cabinet API-keys section and that the
+    Client-Id matches the account that owns the key.
+  source: live-probe
+- code: 7
+  grpc: PERMISSION_DENIED
+  http: 403
+  title: Permission denied
+  remediation: The key lacks the role/permission for this operation.
+  source: derived (grpc canonical)
+- code: 16
+  grpc: UNAUTHENTICATED
+  http: 401
+  title: Missing or invalid authentication
+  remediation: Supply both Client-Id and Api-Key headers.
+  source: derived (grpc canonical)
+- code: 8
+  grpc: RESOURCE_EXHAUSTED
+  http: 429
+  title: Rate limit exceeded
+  remediation: Back off and retry; respect per-method rate limits.
+  source: derived (grpc canonical)
+notes: >-
+  Method mismatch (e.g. GET on an RPC endpoint) returns HTTP 405 with no body.
+  Endpoints are POST-only RPC-style (verified live). The `details` array shape
+  follows google.rpc error details; enrich titles from the OZON error reference
+  once the docs host is reachable (currently behind edge bot-protection).

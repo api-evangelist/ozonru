@@ -1,0 +1,15 @@
+# You can report security issues on our site through our bugbounty programs on Standoff365 Bugbounty or BI.ZONE Bugbounty
+Contact Standoff365 Bugbounty: https://bugbounty.standoff365.com/programs/ozon/
+Contact BI.ZONE Bugbounty: https://bugbounty.bi.zone/companies/ozon/main
+
+# Alternatively, you can use this e-mail address (but we make payments only through Standoff365 Bugbounty and BI.ZONE Bugbounty, so if you want to receive bounty, use Standoff365 Bugbounty or BI.ZONE Bugbounty for reporting):
+Contact: security-report@ozon.ru
+
+# Other security questions, not connected to security bugs
+Contact: https://docs.ozon.ru/common/my-settings/bezopasnost/
+
+Preferred-Languages: en,ru
+
+Canonical: https://www.ozon.ru/.well-known/security.txt
+
+Hiring: https://job.ozon.ru/

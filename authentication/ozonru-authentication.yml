@@ -1,0 +1,40 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  live probe of https://api-seller.ozon.ru + OZON Seller API docs
+  (https://docs.ozon.ru/api/seller/)
+api: OZON Seller API
+base_url: https://api-seller.ozon.ru
+summary: >-
+  The OZON Seller API authenticates every request with two required HTTP
+  headers: a numeric Client-Id and a secret Api-Key, both issued in the seller
+  dashboard (API keys section). There is no OAuth flow. Requests are made over
+  HTTPS/TLS 1.3.
+schemes:
+- id: ozon_seller_headers
+  type: apiKey
+  in: header
+  required_headers:
+  - name: Client-Id
+    format: positive integer
+    description: >-
+      Numeric seller/client identifier. A non-integer value is rejected with
+      HTTP 400 {"code":3,"message":"Client-Id header value should be positive
+      integer"} (verified live).
+  - name: Api-Key
+    format: UUID/secret string
+    description: >-
+      Secret API key issued in the seller cabinet. An invalid key is rejected
+      with HTTP 404 {"code":5,"message":"Invalid Api-Key, please check the key
+      and try again"} (verified live).
+  transport: https-only (TLS 1.3)
+evidence:
+- kind: live-probe
+  detail: >-
+    POST https://api-seller.ozon.ru/v1/warehouse/list with malformed Client-Id
+    returned HTTP 400 code 3; with a valid-format but wrong Api-Key returned
+    HTTP 404 code 5.
+notes: >-
+  API keys are provisioned per seller in the OZON Seller cabinet and can be
+  scoped by role (Admin / read-only / etc.) in the seller UI; there is no
+  standards-based OAuth2/OIDC scopes model, so no scopes/ artifact is derived.

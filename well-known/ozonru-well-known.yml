@@ -1,0 +1,23 @@
+generated: '2026-07-20'
+method: probed
+source: live probes of https://ozon.ru/.well-known/*
+host: ozon.ru
+endpoints:
+- path: /.well-known/security.txt
+  status: 200
+  file: ozonru-security.txt
+- path: /.well-known/openid-configuration
+  status: 403
+  file: null
+- path: /.well-known/oauth-authorization-server
+  status: 403
+  file: null
+- path: /.well-known/api-catalog
+  status: 403
+  file: null
+- path: /.well-known/ai-plugin.json
+  status: 403
+  file: null
+note: >-
+  Non-security.txt probes returned 403 from the site's edge/bot-protection layer
+  (ambiguous, not confirmed present). Only security.txt returned a real 200 body.

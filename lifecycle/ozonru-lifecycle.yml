@@ -1,0 +1,27 @@
+generated: '2026-07-20'
+method: searched
+source: >-
+  live probe of https://api-seller.ozon.ru + OZON Seller API docs
+  (https://docs.ozon.ru/api/seller/)
+api: OZON Seller API
+versioning:
+  scheme: url-path per-operation
+  detail: >-
+    Operations are versioned independently in the path (v1..v4). Verified live:
+    /v1/warehouse/list and /v3/product/list both resolve. Newer method versions
+    are added alongside older ones.
+deprecation:
+  policy: >-
+    OZON marks superseded method versions as deprecated in the API reference and
+    keeps them available for a transition window before removal; the changelog
+    (docs.ozon.ru/api/seller changelog) records version changes. Header-based
+    RFC 8594 Sunset/Deprecation signaling is not documented.
+  documented: true
+changelog:
+  url: https://docs.ozon.ru/api/seller/
+  note: OZON publishes a dated changelog inside the seller API docs.
+status_page:
+  url: null
+  note: No public status page located for the Seller API (host behind bot-protection edge).
+sla:
+  note: Per-method rate limits documented; no public uptime SLA located.

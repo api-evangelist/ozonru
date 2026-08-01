@@ -1,0 +1,22 @@
+generated: '2026-07-20'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: ozon.ru
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Nov  4 14:46:01 2026 GMT
+  hsts: null
+domains:
+- domain: ozon.ru
+  dnssec: false
+  caa:
+  - 0 contactemail "security@ozon.ru"
+  - 0 issuewild "globalsign.com"
+  - 0 issuewild "emsign.com"
+  - 0 issue "letsencrypt.org"
+  - 0 issue "emsign.com"
+  - 0 issuewild "letsencrypt.org"
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine

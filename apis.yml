@@ -1,8 +1,29 @@
 aid: ozonru
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ozonru.png
 name: OZON.ru
-description: 'OZON.ru is a company surfaced as a portfolio company of index-ventures and added to the
-  API Evangelist network as a stub for enrichment. Sector: retail. This profile is a lead awaiting the
-  enrichment pipeline.'
+description: >-
+  OZON is one of Russia's largest e-commerce marketplaces, offering retail across
+  electronics, apparel, groceries, and more, plus its own logistics and
+  fulfillment network (FBO/FBS). For developers, OZON exposes the OZON Seller
+  API, a POST-based RPC-over-HTTP JSON API at https://api-seller.ozon.ru that
+  lets marketplace sellers manage products, prices, stock, warehouses, orders,
+  returns, analytics, and finances programmatically. Authentication uses two
+  headers, a numeric Client-Id and a secret Api-Key issued in the seller
+  cabinet. OZON was surfaced as a portfolio company of Index Ventures and
+  enriched by the API Evangelist pipeline from live probes of its API host and
+  public developer documentation.
 url: https://raw.githubusercontent.com/api-evangelist/ozonru/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
@@ -12,11 +33,37 @@ x-tier: stub
 x-tier-reason: portfolio-lead
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-20'
 tags:
 - Company
 - Retail
-apis: []
+- E-Commerce
+- Marketplace
+- Seller API
+- Russia
+- Logistics
+apis:
+- name: OZON Seller API
+  description: >-
+    RPC-over-HTTP JSON API for OZON marketplace sellers to manage products,
+    prices, stock, warehouses, orders (FBO/FBS), returns, analytics, and
+    finances. POST-only endpoints under a per-operation version path; auth via
+    Client-Id + Api-Key headers.
+  humanURL: https://docs.ozon.ru/api/seller/
+  baseURL: https://api-seller.ozon.ru
+  properties:
+  - type: Documentation
+    url: https://docs.ozon.ru/api/seller/
+  - type: Authentication
+    url: authentication/ozonru-authentication.yml
+  - type: Conventions
+    url: conventions/ozonru-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ozonru-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/ozonru-lifecycle.yml
+  - type: Conformance
+    url: conformance/ozonru-conformance.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -25,3 +72,28 @@ maintainers:
 common:
 - type: Website
   url: http://ozon.ru
+- type: DeveloperPortal
+  url: https://docs.ozon.ru/api/seller/
+- type: Documentation
+  url: https://docs.ozon.ru/api/seller/
+- type: Deprecation
+  url: lifecycle/ozonru-lifecycle.yml
+- type: Lifecycle
+  url: lifecycle/ozonru-lifecycle.yml
+- type: Security
+  url: security/ozonru-vulnerability-disclosure.yml
+- type: VulnerabilityDisclosure
+  url: security/ozonru-vulnerability-disclosure.yml
+- type: DomainSecurity
+  url: security/ozonru-domain-security.yml
+- type: SecurityTxt
+  url: well-known/ozonru-security.txt
+- type: WellKnown
+  url: well-known/ozonru-well-known.yml
+- type: LLMsTxt
+  url: llms/ozonru-llms.txt
+x-enrichment:
+  date: '2026-07-20'
+  status: enriched
+  artifacts_added: 10
+  pass: local-v1

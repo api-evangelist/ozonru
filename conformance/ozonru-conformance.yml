@@ -1,0 +1,32 @@
+generated: '2026-07-20'
+method: derived
+source: >-
+  derived from live probes of https://api-seller.ozon.ru (auth headers, error
+  envelope, request style)
+api: OZON Seller API
+standards:
+- id: oauth2
+  conforms: false
+  evidence: No OAuth2 flow; auth is Client-Id + Api-Key headers (verified live).
+- id: oidc
+  conforms: false
+  evidence: No OpenID Connect; .well-known/openid-configuration not served (403).
+- id: rfc9457
+  conforms: false
+  evidence: >-
+    Errors use a grpc-status JSON envelope {code,message,details}, not
+    application/problem+json (verified live).
+- id: grpc-status
+  conforms: true
+  evidence: >-
+    Error bodies carry gRPC canonical integer status codes (observed code 3
+    INVALID_ARGUMENT, code 5 NOT_FOUND) in a grpc-gateway shape.
+- id: json
+  conforms: true
+  evidence: Requests and responses are application/json (verified live).
+- id: idempotency
+  conforms: false
+  evidence: No documented idempotency-key mechanism.
+- id: pagination
+  conforms: true
+  evidence: Listing methods expose cursor/last_id + limit pagination (per docs).

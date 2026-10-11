@@ -1,0 +1,11 @@
+[
+  {
+    "repo": "ozonru",
+    "captured_at": "2026-10-11T192112",
+    "source_url": "https://docs.ozon.ru/api/seller/",
+    "source_type": "DeveloperPortal",
+    "file": "ozonru-2026-10-11T192112.png",
+    "bytes": 35821,
+    "capture": "playwright-local"
+  }
+]
